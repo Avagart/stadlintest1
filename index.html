@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bildzentrierung mit Cursor-Interaktion</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Versteckt Überlauf */
+            cursor: none; /* Versteckt den Standard-Cursor */
+            background-color: #2f2e36; /* Hintergrundfarbe auf #2f2e36 geändert */
+        }
+
+        img {
+            width: 200vw; /* Bildbreite auf 200% der Sichtbreite setzen */
+            height: 200vh; /* Bildhöhe auf 200% der Sichthöhe setzen */
+            object-fit: cover; /* Bild so skalieren, dass es den gesamten Bereich ausfüllt */
+            position: absolute; /* Bild positionieren */
+            transition: transform 0.1s ease-out; /* Sanfte Bewegung */
+        }
+    </style>
+</head>
+<body>
+    <img id="image" src="image/Illustration.jpg" alt="Illustration">
+    
+    <script>
+        const image = document.getElementById('image');
+        
+        document.addEventListener('mousemove', (event) => {
+            const mouseX = event.clientX; // X-Position des Cursors
+            const mouseY = event.clientY; // Y-Position des Cursors
+
+            // Berechnung der neuen Position des Bildes
+            const imageWidth = window.innerWidth; // Breite des Browserfensters
+            const imageHeight = window.innerHeight; // Höhe des Browserfensters
+
+            // Berechnung der Transformationswerte (dreifache Verschiebung)
+            const offsetX = (mouseX / window.innerWidth) * (imageWidth / 2) - (imageWidth / 4);
+            const offsetY = (mouseY / window.innerHeight) * (imageHeight / 2) - (imageHeight / 4);
+
+            // Setzen der Transformationswerte (dreifache Verschiebung)
+            image.style.transform = `translate(${-offsetX * 3}px, ${-offsetY * 3}px)`;
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
